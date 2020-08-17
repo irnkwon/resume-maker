@@ -15,7 +15,8 @@ import {
   MailFilled,
   CodeFilled,
   GithubFilled,
-  LinkedinFilled
+  LinkedinFilled,
+  LinkOutlined
 } from '@ant-design/icons';
 
 class App extends React.Component {
@@ -49,7 +50,12 @@ class App extends React.Component {
       companyStartDate: "2018-04-30",
       companyEndDate: "2019-08-30",
       jobDesc: "Created 5+ web and mobile applications mainly using React, React Native, CSS, " + 
-        "Node.js, Express.js, GraphQL, Firebase, Git and Sketch"
+        "Node.js, Express.js, GraphQL, Firebase, Git and Sketch",
+
+      // Projects
+      projectName: "Resume Maker",
+      projectLink: "github.com/irnkwon/resume-maker",
+      projectDesc: "Implemented a web application that helps users make an online resume"
     }
   }
 
@@ -83,6 +89,7 @@ class App extends React.Component {
 
     return (
       <Layout className="app-container">
+        {/* Sider Starts */}
         <Sider width={350} theme={"light"}>
           <Card title="Resume Maker" bordered={false}>
             <Collapse defaultActiveKey={['1', '2', '3', '4', '5']} ghost>
@@ -118,9 +125,9 @@ class App extends React.Component {
                   <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
                   <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
                   <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
-                  <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
                   <RangePicker bordered={true} onChange={(date, dateString) => 
                     this.handleChange(date, dateString, "schoolDate")} />
+                  <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
                   <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
                 </Space>
               </Panel>
@@ -128,29 +135,31 @@ class App extends React.Component {
                 <Space direction="vertical">
                   <Input name="jobTitle" placeholder="Job Title" onChange={this.handleChange}></Input>
                   <Input name="companyName" placeholder="Company" onChange={this.handleChange}></Input>
-                  <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
                   <RangePicker bordered={true} onChange={(date, dateString) => 
                     this.handleChange(date, dateString, "companyDate")} />
-                  <TextArea name="jobDesc" placeholder="Experience Description"></TextArea>
+                  <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
+                  <TextArea name="jobDesc" placeholder="Experience Description" onChange={this.handleChange}></TextArea>
                 </Space>
               </Panel>
               <Panel header="Projects" key="5">
                 <Space direction="vertical">
-                  <Input placeholder="Project Name"></Input>
-                  <TextArea placeholder="Project Description"></TextArea>
+                  <Input name="projectName" placeholder="Project Name" onChange={this.handleChange}></Input>
+                  <Input name="projectLink" placeholder="Project Link" onChange={this.handleChange}></Input>
+                  <TextArea name="projectDesc" placeholder="Project Description" onChange={this.handleChange}></TextArea>
                 </Space>
               </Panel>
             </Collapse>
           </Card>
         </Sider>
+        {/* Sider Ends */}
+
+        {/* Main Content Starts */}
         <Layout className="main-content">
           <Content>
             <Space direction="vertical">
-              {/* Basic Information */}
               <Title level={1}>{this.state.name}</Title>
 
               <Space direction="vertical" size={1}>
-                {/* Contact */}
                 <Paragraph><PhoneFilled /> {this.state.phone}</Paragraph>
                 <Paragraph><a href={"mailto:" + this.state.email}><MailFilled /> {this.state.email}</a></Paragraph>
                 <Paragraph><a href={"http://" + this.state.portfolio} target="_blank" rel="noopener noreferrer">
@@ -161,7 +170,6 @@ class App extends React.Component {
                   <LinkedinFilled /> {this.state.linkedin}</a></Paragraph>
               </Space>
 
-              {/* Education */}
               <Space direction="vertical" style={{ marginTop: 30 }}>
                 <Title level={3} underline>Education</Title>
                 <Title level={4}>{this.state.major}, {this.state.schoolName}</Title>
@@ -171,7 +179,6 @@ class App extends React.Component {
                 <Text>{this.state.eduDesc}</Text>
               </Space>
 
-              {/* Experience */}
               <Space direction="vertical" style={{ marginTop: 30 }}>
                 <Title level={3} underline>Experience</Title>
                 <Title level={4}>{this.state.jobTitle}, {this.state.companyName}</Title>
@@ -179,8 +186,20 @@ class App extends React.Component {
                 </Text>
                 <Text>{this.state.jobDesc}</Text>
               </Space>
+
+              <Space direction="vertical" style={{ marginTop: 30 }}>
+                <Title level={3} underline>Projects</Title>    
+                <Space direction="horizontal" size={7}>
+                  <Title level={4}>{this.state.projectName}</Title>
+                  <a href={"http://" + this.state.projectLink} target="_blank" rel="noopener noreferrer">
+                    <LinkOutlined style={{ fontSize: 20 }} /></a>
+                </Space>   
+                <Text>{this.state.projectDesc}</Text>
+              </Space>
             </Space>
           </Content>
+          {/* Main Content Ends */}
+
           <Footer className="footer">
             2020 © designed and developed by Irene Kwon
           </Footer>
