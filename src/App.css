@@ -1,5 +1,13 @@
 @import '~antd/dist/antd.css';
 
+.app-container {
+    min-height: 100vh;
+}
+
 .main-content {
+    margin: 70px 0 0 100px;
+}
+
+.footer {
     text-align: center;
 }
