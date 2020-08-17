@@ -31,13 +31,39 @@ class App extends React.Component {
       email: "irene.haeryun.kwon@gmail.com",
       portfolio: "irnkwon.github.io",
       github: "github.com/irnkwon",
-      linkedin: "linkedin.com/in/irene-kwon"
+      linkedin: "linkedin.com/in/irene-kwon",
+
+      // Education
+      schoolName: "Conestoga College",
+      major: "Computer Programming/Analysis",
+      degree: "Advanced Diploma",
+      schoolLocation: "Waterloo, Ontario",
+      schoolStartDate: "2015-09-08",
+      schoolEndDate: "2020-04-22",
+      eduDesc: "GPA: 3.87, Dean's Honor List, Graduation with Distinction",
+
+      // Experience
+      jobTitle: "Designer/Developer",
+      companyName: "WSIB Ontairo",
+      companyLocation: "Kitchener, Ontario",
+      companyStartDate: "2018-04-30",
+      companyEndDate: "2019-08-30",
+      jobDesc: "Created 5+ web and mobile applications mainly using React, React Native, CSS, " + 
+        "Node.js, Express.js, GraphQL, Firebase, Git and Sketch"
     }
   }
 
-  handleChange = (e) => {
-    const value = e.target.value;
-    this.setState({ [e.target.name]: value });
+  handleChange = (e, dateString, id) => {
+    if (id === "schoolDate") {
+      this.setState({ schoolStartDate: dateString[0] });
+      this.setState({ schoolEndDate: dateString[1] });
+    } else if (id === "companyDate") {
+      this.setState({ companyStartDate: dateString[0] });
+      this.setState({ companyEndDate: dateString[1] });
+    } else {
+      const value = e.target.value;
+      this.setState({ [e.target.name]: value });
+    }
   }
 
   render() {
@@ -46,7 +72,7 @@ class App extends React.Component {
     const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Sider, Content, Footer } = Layout;
-    const { Title, Paragraph } = Typography;
+    const { Title, Paragraph, Text } = Typography;
     const { Option } = Select;
     const selectBefore = (
       <Select defaultValue="http://" className="select-before">
@@ -89,18 +115,23 @@ class App extends React.Component {
               </Panel>
               <Panel header="Education" key="3">
                 <Space direction="vertical">
-                  <Input name="school" placeholder="School" onChange={this.handleChange}></Input>
+                  <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
+                  <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
+                  <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
                   <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                  <RangePicker bordered={true} />
-                  <TextArea placeholder="Education Description"></TextArea>
+                  <RangePicker bordered={true} onChange={(date, dateString) => 
+                    this.handleChange(date, dateString, "schoolDate")} />
+                  <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
                 </Space>
               </Panel>
               <Panel header="Experience" key="4">
                 <Space direction="vertical">
-                  <Input name="company" placeholder="Company" onChange={this.handleChange}></Input>
+                  <Input name="jobTitle" placeholder="Job Title" onChange={this.handleChange}></Input>
+                  <Input name="companyName" placeholder="Company" onChange={this.handleChange}></Input>
                   <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                  <RangePicker bordered={true} />
-                  <TextArea placeholder="Experience Description"></TextArea>
+                  <RangePicker bordered={true} onChange={(date, dateString) => 
+                    this.handleChange(date, dateString, "companyDate")} />
+                  <TextArea name="jobDesc" placeholder="Experience Description"></TextArea>
                 </Space>
               </Panel>
               <Panel header="Projects" key="5">
@@ -114,15 +145,41 @@ class App extends React.Component {
         </Sider>
         <Layout className="main-content">
           <Content>
-            <Title level={1}>{this.state.name}</Title>
-            <Paragraph><PhoneFilled /> {this.state.phone}</Paragraph>
-            <Paragraph><a href={"mailto:" + this.state.email}><MailFilled /> {this.state.email}</a></Paragraph>
-            <Paragraph><a href={"http://" + this.state.portfolio} target="_blank" rel="noopener noreferrer">
-              <CodeFilled /> {this.state.portfolio}</a></Paragraph>
-            <Paragraph><a href={"http://" + this.state.github} target="_blank" rel="noopener noreferrer">
-              <GithubFilled /> {this.state.github}</a></Paragraph>
-            <Paragraph><a href={"http://" + this.state.linkedin} target="_blank" rel="noopener noreferrer">
-              <LinkedinFilled /> {this.state.linkedin}</a></Paragraph>
+            <Space direction="vertical">
+              {/* Basic Information */}
+              <Title level={1}>{this.state.name}</Title>
+
+              <Space direction="vertical" size={1}>
+                {/* Contact */}
+                <Paragraph><PhoneFilled /> {this.state.phone}</Paragraph>
+                <Paragraph><a href={"mailto:" + this.state.email}><MailFilled /> {this.state.email}</a></Paragraph>
+                <Paragraph><a href={"http://" + this.state.portfolio} target="_blank" rel="noopener noreferrer">
+                  <CodeFilled /> {this.state.portfolio}</a></Paragraph>
+                <Paragraph><a href={"http://" + this.state.github} target="_blank" rel="noopener noreferrer">
+                  <GithubFilled /> {this.state.github}</a></Paragraph>
+                <Paragraph><a href={"http://" + this.state.linkedin} target="_blank" rel="noopener noreferrer">
+                  <LinkedinFilled /> {this.state.linkedin}</a></Paragraph>
+              </Space>
+
+              {/* Education */}
+              <Space direction="vertical" style={{ marginTop: 30 }}>
+                <Title level={3} underline>Education</Title>
+                <Title level={4}>{this.state.major}, {this.state.schoolName}</Title>
+                <Text strong>{this.state.degree}</Text>
+                <Text type="secondary">{this.state.schoolStartDate} to {this.state.schoolEndDate} · {this.state.schoolLocation}
+                </Text>
+                <Text>{this.state.eduDesc}</Text>
+              </Space>
+
+              {/* Experience */}
+              <Space direction="vertical" style={{ marginTop: 30 }}>
+                <Title level={3} underline>Experience</Title>
+                <Title level={4}>{this.state.jobTitle}, {this.state.companyName}</Title>
+                <Text type="secondary">{this.state.companyStartDate} to {this.state.companyEndDate} · {this.state.companyLocation}
+                </Text>
+                <Text>{this.state.jobDesc}</Text>
+              </Space>
+            </Space>
           </Content>
           <Footer className="footer">
             2020 © designed and developed by Irene Kwon
