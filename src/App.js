@@ -26,6 +26,7 @@ class App extends React.Component {
     this.state = {
       // Basic Information
       name: "Irene Kwon",
+      summary: "UI/UX Designer | Software Developer",
 
       // Contact
       phone: "123-456-7890",
@@ -93,61 +94,66 @@ class App extends React.Component {
         <Sider width={350} theme={"light"}>
           <Card title="Resume Maker" bordered={false}>
             <Collapse defaultActiveKey={['1', '2', '3', '4', '5']} ghost>
-              <Panel header="Basic Information" key="1">
-                <Input name="name" placeholder="Your Name" onChange={this.handleChange}></Input>
-              </Panel>
-              <Panel header="Contact" key="2">
-                <Space direction="vertical" size={12}>
-                  <Input name="phone" placeholder="Phone Number" onChange={this.handleChange}></Input>
-                  <Input name="email" placeholder="Email Address" onChange={this.handleChange}></Input>
-                  <Input 
-                    name="portfolio" 
-                    placeholder="Portfolio Address" 
-                    addonBefore={selectBefore} 
-                    onChange={this.handleChange}
-                  ></Input>
-                  <Input 
-                    name="github" 
-                    placeholder="Github Address" 
-                    addonBefore={selectBefore} 
-                    onChange={this.handleChange}
-                  ></Input>
-                  <Input 
-                    name="linkedin" 
-                    placeholder="LinkedIn Address" 
-                    addonBefore={selectBefore} 
-                    onChange={this.handleChange}
-                  ></Input>
-                </Space>
-              </Panel>
-              <Panel header="Education" key="3">
-                <Space direction="vertical">
-                  <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
-                  <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
-                  <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
-                  <RangePicker bordered={true} onChange={(date, dateString) => 
-                    this.handleChange(date, dateString, "schoolDate")} />
-                  <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                  <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
-                </Space>
-              </Panel>
-              <Panel header="Experience" key="4">
-                <Space direction="vertical">
-                  <Input name="jobTitle" placeholder="Job Title" onChange={this.handleChange}></Input>
-                  <Input name="companyName" placeholder="Company" onChange={this.handleChange}></Input>
-                  <RangePicker bordered={true} onChange={(date, dateString) => 
-                    this.handleChange(date, dateString, "companyDate")} />
-                  <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                  <TextArea name="jobDesc" placeholder="Experience Description" onChange={this.handleChange}></TextArea>
-                </Space>
-              </Panel>
-              <Panel header="Projects" key="5">
-                <Space direction="vertical">
-                  <Input name="projectName" placeholder="Project Name" onChange={this.handleChange}></Input>
-                  <Input name="projectLink" placeholder="Project Link" onChange={this.handleChange}></Input>
-                  <TextArea name="projectDesc" placeholder="Project Description" onChange={this.handleChange}></TextArea>
-                </Space>
-              </Panel>
+              {siderSections.map((i) => (
+                <Panel header={i.header} key={i.key}>
+                  {
+                    i.header === "Basic Information" ? (
+                      <Space direction="vertical" size={12}>
+                        <Input name="name" placeholder="Your Name" onChange={this.handleChange}></Input>
+                        <TextArea name="summary" placeholder="Summary" onChange={this.handleChange}></TextArea>
+                      </Space>
+                    ) : i.header === "Contact" ? (
+                      <Space direction="vertical" size={12}>
+                        <Input name="phone" placeholder="Phone Number" onChange={this.handleChange}></Input>
+                        <Input name="email" placeholder="Email Address" onChange={this.handleChange}></Input>
+                        <Input 
+                          name="portfolio" 
+                          placeholder="Portfolio Address" 
+                          addonBefore={selectBefore} 
+                          onChange={this.handleChange}
+                        ></Input>
+                        <Input 
+                          name="github" 
+                          placeholder="Github Address" 
+                          addonBefore={selectBefore} 
+                          onChange={this.handleChange}
+                        ></Input>
+                        <Input 
+                          name="linkedin" 
+                          placeholder="LinkedIn Address" 
+                          addonBefore={selectBefore} 
+                          onChange={this.handleChange}
+                        ></Input>
+                      </Space>
+                    ) : i.header === "Education" ? (
+                      <Space direction="vertical">
+                        <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
+                        <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
+                        <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
+                        <RangePicker bordered={true} onChange={(date, dateString) => 
+                          this.handleChange(date, dateString, "schoolDate")} />
+                        <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
+                        <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
+                      </Space>
+                    ) : i.header === "Experience" ? (
+                      <Space direction="vertical">
+                        <Input name="jobTitle" placeholder="Job Title" onChange={this.handleChange}></Input>
+                        <Input name="companyName" placeholder="Company" onChange={this.handleChange}></Input>
+                        <RangePicker bordered={true} onChange={(date, dateString) => 
+                          this.handleChange(date, dateString, "companyDate")} />
+                        <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
+                        <TextArea name="jobDesc" placeholder="Experience Description" onChange={this.handleChange}></TextArea>
+                      </Space>
+                    ) : i.header === "Projects" ? (
+                        <Space direction="vertical">
+                        <Input name="projectName" placeholder="Project Name" onChange={this.handleChange}></Input>
+                        <Input name="projectLink" placeholder="Project Link" onChange={this.handleChange}></Input>
+                        <TextArea name="projectDesc" placeholder="Project Description" onChange={this.handleChange}></TextArea>
+                      </Space>
+                    ) : null
+                  }
+                </Panel>
+              ))}
             </Collapse>
           </Card>
         </Sider>
@@ -158,6 +164,7 @@ class App extends React.Component {
           <Content>
             <Space direction="vertical">
               <Title level={1}>{this.state.name}</Title>
+              <Title level={4}>{this.state.summary}</Title>
 
               <Space direction="vertical" size={1}>
                 <Paragraph><PhoneFilled /> {this.state.phone}</Paragraph>
@@ -210,3 +217,26 @@ class App extends React.Component {
 }
 
 export default App;
+
+const siderSections = [
+  {
+    key: 1,
+    header: "Basic Information"
+  },
+  {
+    key: 2,
+    header: "Contact"
+  },
+  {
+    key: 3,
+    header: "Education"
+  },
+  {
+    key: 4,
+    header: "Experience"
+  },
+  {
+    key: 5,
+    header: "Projects"
+  }
+]
