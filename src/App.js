@@ -3,7 +3,6 @@ import './App.css';
 import { Card, 
   Collapse, 
   Input, 
-  DatePicker,
   Space,
   Layout,
   Typography,
@@ -19,6 +18,10 @@ import {
   LinkedinFilled,
   LinkOutlined
 } from '@ant-design/icons';
+
+import { Education } from './Components/Education';
+import { Experience } from './Components/Experience';
+import { Projects } from './Components/Projects';
 
 class App extends React.Component {
 
@@ -82,7 +85,6 @@ class App extends React.Component {
   render() {
 
     const { Panel } = Collapse;
-    const { RangePicker } = DatePicker;
     const { TextArea } = Input;
     const { Sider, Content, Footer } = Layout;
     const { Title, Paragraph, Text } = Typography;
@@ -133,30 +135,17 @@ class App extends React.Component {
                       </Space>
                     ) : i.header === "Education" ? (
                       <Space direction="vertical">
-                        <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
-                        <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
-                        <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
-                        <RangePicker bordered={true} onChange={(date, dateString) => 
-                          this.handleChange(date, dateString, "schoolDate")} />
-                        <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                        <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
+                        <Education />
                         <Button type="link">Add More Education</Button>
                       </Space>
                     ) : i.header === "Experience" ? (
                       <Space direction="vertical">
-                        <Input name="jobTitle" placeholder="Job Title" onChange={this.handleChange}></Input>
-                        <Input name="companyName" placeholder="Company" onChange={this.handleChange}></Input>
-                        <RangePicker bordered={true} onChange={(date, dateString) => 
-                          this.handleChange(date, dateString, "companyDate")} />
-                        <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                        <TextArea name="jobDesc" placeholder="Experience Description" onChange={this.handleChange}></TextArea>
+                        <Experience />
                         <Button type="link">Add More Experience</Button>
                       </Space>
                     ) : i.header === "Projects" ? (
                         <Space direction="vertical">
-                        <Input name="projectName" placeholder="Project Name" onChange={this.handleChange}></Input>
-                        <Input name="projectLink" placeholder="Project Link" onChange={this.handleChange}></Input>
-                        <TextArea name="projectDesc" placeholder="Project Description" onChange={this.handleChange}></TextArea>
+                        <Projects />
                         <Button type="link">Add More Projects</Button>
                       </Space>
                     ) : null
