@@ -7,7 +7,8 @@ import { Card,
   Space,
   Layout,
   Typography,
-  Select
+  Select,
+  Button
 } from 'antd';
 
 import {
@@ -36,13 +37,18 @@ class App extends React.Component {
       linkedin: "linkedin.com/in/irene-kwon",
 
       // Education
-      schoolName: "Conestoga College",
-      major: "Computer Programming/Analysis",
-      degree: "Advanced Diploma",
-      schoolLocation: "Waterloo, Ontario",
-      schoolStartDate: "2015-09-08",
-      schoolEndDate: "2020-04-22",
-      eduDesc: "GPA: 3.87, Dean's Honor List, Graduation with Distinction",
+      education: [
+        {
+          key: 1,
+          schoolName: "Conestoga College",
+          major: "Computer Programming/Analysis",
+          degree: "Advanced Diploma",
+          schoolLocation: "Waterloo, Ontario",
+          schoolStartDate: "2015-09-08",
+          schoolEndDate: "2020-04-22",
+          eduDesc: "GPA: 3.87, Dean's Honor List, Graduation with Distinction"
+        }
+      ],
 
       // Experience
       jobTitle: "Designer/Developer",
@@ -134,6 +140,7 @@ class App extends React.Component {
                           this.handleChange(date, dateString, "schoolDate")} />
                         <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
                         <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
+                        <Button type="link">Add More Education</Button>
                       </Space>
                     ) : i.header === "Experience" ? (
                       <Space direction="vertical">
@@ -143,12 +150,14 @@ class App extends React.Component {
                           this.handleChange(date, dateString, "companyDate")} />
                         <Input name="companyLocation" placeholder="Location" onChange={this.handleChange}></Input>
                         <TextArea name="jobDesc" placeholder="Experience Description" onChange={this.handleChange}></TextArea>
+                        <Button type="link">Add More Experience</Button>
                       </Space>
                     ) : i.header === "Projects" ? (
                         <Space direction="vertical">
                         <Input name="projectName" placeholder="Project Name" onChange={this.handleChange}></Input>
                         <Input name="projectLink" placeholder="Project Link" onChange={this.handleChange}></Input>
                         <TextArea name="projectDesc" placeholder="Project Description" onChange={this.handleChange}></TextArea>
+                        <Button type="link">Add More Projects</Button>
                       </Space>
                     ) : null
                   }
@@ -179,11 +188,15 @@ class App extends React.Component {
 
               <Space direction="vertical" style={{ marginTop: 30 }}>
                 <Title level={3} underline>Education</Title>
-                <Title level={4}>{this.state.major}, {this.state.schoolName}</Title>
-                <Text strong>{this.state.degree}</Text>
-                <Text type="secondary">{this.state.schoolStartDate} to {this.state.schoolEndDate} · {this.state.schoolLocation}
-                </Text>
-                <Text>{this.state.eduDesc}</Text>
+                {this.state.education.map((i) => (
+                  <Space direction="vertical" key={i.key}>
+                    <Title level={4}>{i.major}, {i.schoolName}</Title>
+                    <Text strong>{i.degree}</Text>
+                    <Text type="secondary">{i.schoolStartDate} to {i.schoolEndDate} · {i.schoolLocation}
+                    </Text>
+                    <Text>{i.eduDesc}</Text>
+                  </Space>
+                ))}
               </Space>
 
               <Space direction="vertical" style={{ marginTop: 30 }}>
