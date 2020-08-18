@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, DatePicker, Space } from 'antd';
+import { Input, DatePicker, Space, Divider } from 'antd';
 
 export class Education extends React.Component {
     render() {
@@ -7,6 +7,7 @@ export class Education extends React.Component {
         const { TextArea } = Input;
         return(
             <Space direction="vertical">
+                <Divider />
                 <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
                 <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
                 <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>

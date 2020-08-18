@@ -82,6 +82,23 @@ class App extends React.Component {
     }
   }
 
+  addEducation = () => {
+    let curKey = this.state.key;
+    this.setState(prevState => ({
+      education: [...prevState.education, {
+        key: curKey + 1,
+        schoolName: "",
+        major: "",
+        degree: "",
+        schoolLocation: "",
+        schoolStartDate: "",
+        schoolEndDate: "",
+        eduDesc: ""
+      }]
+    }));
+    console.log(this.state.education);
+  }
+
   render() {
 
     const { Panel } = Collapse;
@@ -135,8 +152,10 @@ class App extends React.Component {
                       </Space>
                     ) : i.header === "Education" ? (
                       <Space direction="vertical">
-                        <Education />
-                        <Button type="link">Add More Education</Button>
+                        {this.state.education.map((i) => (
+                          <Education key={i.key} />
+                        ))}
+                        <Button type="link" onClick={this.addEducation}>Add More Education</Button>
                       </Space>
                     ) : i.header === "Experience" ? (
                       <Space direction="vertical">
