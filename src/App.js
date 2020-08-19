@@ -7,7 +7,8 @@ import { Card,
   Layout,
   Typography,
   Select,
-  Button
+  Button,
+  Divider
 } from 'antd';
 
 import {
@@ -78,15 +79,15 @@ class App extends React.Component {
       this.setState({ companyEndDate: dateString[1] });
     } else {
       const value = e.target.value;
-      this.setState({ [e.target.name]: value });
+      const name = e.target.name;
+      this.setState({ [name]: value });
     }
   }
 
   addEducation = () => {
-    let curKey = this.state.key;
     this.setState(prevState => ({
       education: [...prevState.education, {
-        key: curKey + 1,
+        key: prevState.education[prevState.education.length - 1].key + 1,
         schoolName: "",
         major: "",
         degree: "",
@@ -96,7 +97,6 @@ class App extends React.Component {
         eduDesc: ""
       }]
     }));
-    console.log(this.state.education);
   }
 
   render() {
@@ -153,7 +153,10 @@ class App extends React.Component {
                     ) : i.header === "Education" ? (
                       <Space direction="vertical">
                         {this.state.education.map((i) => (
-                          <Education key={i.key} />
+                          <React.Fragment>
+                            {i.key !== 1 ? <Divider /> : null}
+                            <Education handleChange={this.handleChange} />
+                          </React.Fragment>
                         ))}
                         <Button type="link" onClick={this.addEducation}>Add More Education</Button>
                       </Space>

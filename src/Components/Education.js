@@ -1,20 +1,20 @@
 import React from 'react';
-import { Input, DatePicker, Space, Divider } from 'antd';
+import { Input, DatePicker, Space } from 'antd';
 
 export class Education extends React.Component {
     render() {
         const { RangePicker } = DatePicker;
         const { TextArea } = Input;
-        return(
+        const { handleChange } = this.props;
+        return (
             <Space direction="vertical">
-                <Divider />
-                <Input name="schoolName" placeholder="School" onChange={this.handleChange}></Input>
-                <Input name="major" placeholder="Major" onChange={this.handleChange}></Input>
-                <Input name="degree" placeholder="Degree" onChange={this.handleChange}></Input>
+                <Input name="schoolName" placeholder="School" onChange={handleChange}></Input>
+                <Input name="major" placeholder="Major" onChange={handleChange}></Input>
+                <Input name="degree" placeholder="Degree" onChange={handleChange}></Input>
                 <RangePicker bordered={true} onChange={(date, dateString) => 
-                this.handleChange(date, dateString, "schoolDate")} />
-                <Input name="schoolLocation" placeholder="Location" onChange={this.handleChange}></Input>
-                <TextArea name="eduDesc" placeholder="Education Description" onChange={this.handleChange}></TextArea>
+                handleChange(date, dateString, "schoolDate")} />
+                <Input name="schoolLocation" placeholder="Location" onChange={handleChange}></Input>
+                <TextArea name="eduDesc" placeholder="Education Description" onChange={handleChange}></TextArea>
             </Space>
         );
     }
