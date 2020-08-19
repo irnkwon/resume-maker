@@ -162,7 +162,7 @@ class App extends React.Component {
 
   handleRemove = (id, key) => {
     this.setState((prevState) => ({
-      [id]: [...prevState[id].slice(0, key), ...prevState[id].slice(key + 1)]
+      [id]: [...prevState[id].filter(i => i.key !== key)]
     }));
   }
 
