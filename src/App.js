@@ -48,8 +48,8 @@ class App extends React.Component {
           major: "[Major]",
           degree: "[Degree]",
           schoolLocation: "[Location]",
-          schoolStartDate: "[Start Date]",
-          schoolEndDate: "[End Date]",
+          schoolStartDate: "01-01-2020",
+          schoolEndDate: "01-01-2020",
           eduDesc: "[Description]"
         }
       ],
@@ -61,8 +61,8 @@ class App extends React.Component {
           jobTitle: "[Job Title]",
           companyName: "[Company 0]",
           companyLocation: "[Location]",
-          companyStartDate: "[Start Date]",
-          companyEndDate: "[End Date]",
+          companyStartDate: "01-01-2020",
+          companyEndDate: "01-01-2020",
           jobDesc: "[Description]"
         }
       ],
@@ -106,13 +106,15 @@ class App extends React.Component {
   handleDateChange = (date, dateString, id, key) => {
     if (id === "schoolDate") { // Education
       const newEducation = this.state.education.slice();
-      newEducation[key].schoolStartDate = dateString[0];
-      newEducation[key].schoolEndDate = dateString[1];
+      const item = [...newEducation.filter(i => i.key === key)];
+      item[0].schoolStartDate = dateString[0];
+      item[0].schoolEndDate = dateString[1];
       this.setState({ education: newEducation });
     } if (id === "companyDate") { // Experience
       const newExperience = this.state.experience.slice();
-      newExperience[key].companyStartDate = dateString[0];
-      newExperience[key].companyEndDate = dateString[1];
+      const item = [...newExperience.filter(i => i.key === key)];
+      item[0].companyStartDate = dateString[0];
+      item[0].companyEndDate = dateString[1];
       this.setState({ experience: newExperience });
     }
   }
@@ -126,8 +128,8 @@ class App extends React.Component {
         major: "[Major]",
         degree: "[Degree]",
         schoolLocation: "[Location]",
-        schoolStartDate: "[Start Date]",
-        schoolEndDate: "[End Date]",
+        schoolStartDate: "01-01-2020",
+        schoolEndDate: "01-01-2020",
         eduDesc: "[Description]"
       }]
     }));
@@ -141,8 +143,8 @@ class App extends React.Component {
         companyName: prevState.experience.length !== 0 ? 
           ("[Company " + (prevState.experience[prevState.experience.length - 1].key + 1)  + "]") : "[Company 0]",
         companyLocation: "[Location]",
-        companyStartDate: "[Start Date]",
-        companyEndDate: "[End Date]",
+        companyStartDate: "01-01-2020",
+        companyEndDate: "01-01-2020",
         jobDesc: "[Description]"
       }]
     }));
@@ -222,8 +224,9 @@ class App extends React.Component {
                         {this.state.education.map((i) => (
                           <React.Fragment key={i.key}>
                             {i.key !== 0 ? <Divider /> : null}
-                            <Education handleChange={this.handleChange} 
-                              handleDateChange={this.handleDateChange} eduKey={i.key} />
+                            <Education handleChange={this.handleChange} handleDateChange={this.handleDateChange} 
+                              eduKey={i.key} name={i.schoolName} major={i.major} degree={i.degree} 
+                              start={i.schoolStartDate} end={i.schoolEndDate} location={i.schoolLocation} desc={i.eduDesc} />
                             <Button type="link" onClick={() => this.handleRemove("education", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
@@ -234,8 +237,9 @@ class App extends React.Component {
                         {this.state.experience.map((i) => (
                           <React.Fragment key={i.key}>
                             {i.key !== 0 ? <Divider /> : null}
-                            <Experience handleChange={this.handleChange} 
-                              handleDateChange={this.handleDateChange} expKey={i.key} />
+                            <Experience handleChange={this.handleChange} handleDateChange={this.handleDateChange} 
+                              expKey={i.key} title={i.jobTitle} company={i.companyName} start={i.companyStartDate} 
+                              end={i.companyEndDate} location={i.companyLocation} desc={i.jobDesc} />
                             <Button type="link" onClick={() => this.handleRemove("experience", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
@@ -246,7 +250,8 @@ class App extends React.Component {
                         {this.state.projects.map((i) => (
                           <React.Fragment key={i.key}>
                             {i.key !== 0 ? <Divider /> : null}
-                            <Projects handleChange={this.handleChange} projectKey={i.key} />
+                            <Projects handleChange={this.handleChange} projectKey={i.key} 
+                              name={i.projectName} link={i.projectLink} desc={i.projectDesc} />
                             <Button type="link" onClick={() => this.handleRemove("projects", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
