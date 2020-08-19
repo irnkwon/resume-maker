@@ -30,27 +30,27 @@ class App extends React.Component {
     super(props);
     this.state = {
       // Basic Information
-      name: "Irene Kwon",
-      summary: "UI/UX Designer | Software Developer",
+      name: "[Your Name]",
+      summary: "[Summary]",
 
       // Contact
-      phone: "123-456-7890",
-      email: "irene.haeryun.kwon@gmail.com",
-      portfolio: "irnkwon.github.io",
-      github: "github.com/irnkwon",
-      linkedin: "linkedin.com/in/irene-kwon",
+      phone: "[Phone Number]",
+      email: "[Email Address]",
+      portfolio: "[Portfolio Address]",
+      github: "[Github Address]",
+      linkedin: "[LinkedIn Address]",
 
       // Education
       education: [
         {
           key: 0,
-          schoolName: "Conestoga College",
-          major: "Computer Programming/Analysis",
-          degree: "Advanced Diploma",
-          schoolLocation: "Waterloo, Ontario",
-          schoolStartDate: "2015-09-08",
-          schoolEndDate: "2020-04-22",
-          eduDesc: "GPA: 3.87, Dean's Honor List, Graduation with Distinction"
+          schoolName: "[School 0]",
+          major: "[Major]",
+          degree: "[Degree]",
+          schoolLocation: "[Location]",
+          schoolStartDate: "[Start Date]",
+          schoolEndDate: "[End Date]",
+          eduDesc: "[Description]"
         }
       ],
 
@@ -58,13 +58,12 @@ class App extends React.Component {
       experience: [
         {
           key: 0,
-          jobTitle: "Designer/Developer",
-          companyName: "WSIB Ontairo",
-          companyLocation: "Kitchener, Ontario",
-          companyStartDate: "2018-04-30",
-          companyEndDate: "2019-08-30",
-          jobDesc: "Created 5+ web and mobile applications mainly using React, React Native, CSS, " + 
-            "Node.js, Express.js, GraphQL, Firebase, Git and Sketch"
+          jobTitle: "[Job Title]",
+          companyName: "[Company 0]",
+          companyLocation: "[Location]",
+          companyStartDate: "[Start Date]",
+          companyEndDate: "[End Date]",
+          jobDesc: "[Description]"
         }
       ],
 
@@ -72,9 +71,9 @@ class App extends React.Component {
       projects: [
         {
           key: 0,
-          projectName: "Resume Maker",
+          projectName: "[Project 0]",
           projectLink: "github.com/irnkwon/resume-maker",
-          projectDesc: "Implemented a web application that helps users make an online resume"
+          projectDesc: "[Description]"
         }
       ]
     }
@@ -119,13 +118,14 @@ class App extends React.Component {
     this.setState(prevState => ({
       education: [...prevState.education, {
         key: prevState.education.length !== 0 ? prevState.education[prevState.education.length - 1].key + 1 : 0,
-        schoolName: "",
-        major: "",
-        degree: "",
-        schoolLocation: "",
-        schoolStartDate: "",
-        schoolEndDate: "",
-        eduDesc: ""
+        schoolName: prevState.education.length !== 0 ? 
+          ("[School " + (prevState.education[prevState.education.length - 1].key + 1)  + "]") : "[School 0]",
+        major: "[Major]",
+        degree: "[Degree]",
+        schoolLocation: "[Location]",
+        schoolStartDate: "[Start Date]",
+        schoolEndDate: "[End Date]",
+        eduDesc: "[Description]"
       }]
     }));
   }
@@ -134,12 +134,13 @@ class App extends React.Component {
     this.setState(prevState => ({
       experience: [...prevState.experience, {
         key: prevState.experience.length !== 0 ? prevState.experience[prevState.experience.length - 1].key + 1 : 0,
-        jobTitle: "",
-        companyName: "",
-        companyLocation: "",
-        companyStartDate: "",
-        companyEndDate: "",
-        jobDesc: ""
+        jobTitle: "[Job Title]",
+        companyName: prevState.experience.length !== 0 ? 
+          ("[Company " + (prevState.experience[prevState.experience.length - 1].key + 1)  + "]") : "[Company 0]",
+        companyLocation: "[Location]",
+        companyStartDate: "[Start Date]",
+        companyEndDate: "[End Date]",
+        jobDesc: "[Description]"
       }]
     }));
   }
@@ -148,9 +149,10 @@ class App extends React.Component {
     this.setState(prevState => ({
       projects: [...prevState.projects, {
         key: prevState.projects.length !== 0 ? prevState.projects[prevState.projects.length - 1].key + 1 : 0,
-        projectName: "",
-        projectLink: "",
-        projectDesc: ""
+        projectName: prevState.projects.length !== 0 ? 
+        ("[Project " + (prevState.projects[prevState.projects.length - 1].key + 1)  + "]") : "[Project 0]",
+        projectLink: "github.com/irnkwon/resume-maker",
+        projectDesc: "[Description]"
       }]
     }));
   }
