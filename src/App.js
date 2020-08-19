@@ -69,9 +69,14 @@ class App extends React.Component {
       ],
 
       // Projects
-      projectName: "Resume Maker",
-      projectLink: "github.com/irnkwon/resume-maker",
-      projectDesc: "Implemented a web application that helps users make an online resume"
+      projects: [
+        {
+          key: 0,
+          projectName: "Resume Maker",
+          projectLink: "github.com/irnkwon/resume-maker",
+          projectDesc: "Implemented a web application that helps users make an online resume"
+        }
+      ]
     }
   }
 
@@ -91,6 +96,11 @@ class App extends React.Component {
     const newExperience = this.state.experience.slice();
     newExperience[key][name] = value;
     this.setState({ experience: newExperience });
+
+    // Projects
+    const newProjects = this.state.projects.slice();
+    newProjects[key][name] = value;
+    this.setState({ projects: newProjects });
   }
 
   handleDateChange = (date, dateString, id, key) => {
@@ -132,6 +142,17 @@ class App extends React.Component {
         companyStartDate: "",
         companyEndDate: "",
         jobDesc: ""
+      }]
+    }));
+  }
+  
+  addProject = () => {
+    this.setState(prevState => ({
+      projects: [...prevState.projects, {
+        key: prevState.projects[prevState.projects.length - 1].key + 1,
+        projectName: "",
+        projectLink: "",
+        projectDesc: ""
       }]
     }));
   }
@@ -211,8 +232,13 @@ class App extends React.Component {
                       </Space>
                     ) : i.header === "Projects" ? (
                         <Space direction="vertical">
-                        <Projects />
-                        <Button type="link">Add More Projects</Button>
+                        {this.state.projects.map((i) => (
+                          <React.Fragment key={i.key}>
+                            {i.key !== 0 ? <Divider /> : null}
+                            <Projects handleChange={this.handleChange} projectKey={i.key} />
+                          </React.Fragment>
+                        ))}
+                        <Button type="link" onClick={this.addProject}>Add More Project</Button>
                       </Space>
                     ) : null
                   }
@@ -267,13 +293,17 @@ class App extends React.Component {
               </Space>
 
               <Space direction="vertical" style={{ marginTop: 30 }}>
-                <Title level={3} underline>Projects</Title>    
-                <Space direction="horizontal" size={7}>
-                  <Title level={4}>{this.state.projectName}</Title>
-                  <a href={"http://" + this.state.projectLink} target="_blank" rel="noopener noreferrer">
-                    <LinkOutlined style={{ fontSize: 20 }} /></a>
-                </Space>   
-                <Text>{this.state.projectDesc}</Text>
+                <Title level={3} underline>Projects</Title>
+                {this.state.projects.map((i) => (
+                  <Space direction="vertical" key={i.key} style={i.key !== 0 ? { marginTop: 15 } : null}>
+                    <Space direction="horizontal" size={7}>
+                      <Title level={4}>{i.projectName}</Title>
+                      <a href={"http://" + i.projectLink} target="_blank" rel="noopener noreferrer">
+                        <LinkOutlined style={{ fontSize: 20 }} /></a>
+                    </Space>   
+                    <Text>{i.projectDesc}</Text>
+                  </Space>
+                ))}
               </Space>
             </Space>
           </Content>
