@@ -85,15 +85,18 @@ class App extends React.Component {
 
     if (id === "edu") {
       const newEducation = this.state.education.slice();
-      newEducation[key][name] = value;
+      const item = [...newEducation.filter(i => i.key === key)];
+      item[0][name] = value;
       this.setState({ education: newEducation });
     } if (id === "exp") {
       const newExperience = this.state.experience.slice();
-      newExperience[key][name] = value;
+      const item = [...newExperience.filter(i => i.key === key)];
+      item[0][name] = value;
       this.setState({ experience: newExperience });
     } if (id === "projects") {
       const newProjects = this.state.projects.slice();
-      newProjects[key][name] = value;
+      const item = [...newProjects.filter(i => i.key === key)];
+      item[0][name] = value;
       this.setState({ projects: newProjects });
     } else { // Basic Information
       this.setState({ [name]: value });
