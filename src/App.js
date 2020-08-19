@@ -118,7 +118,7 @@ class App extends React.Component {
   addEducation = () => {
     this.setState(prevState => ({
       education: [...prevState.education, {
-        key: prevState.education[prevState.education.length - 1].key + 1,
+        key: prevState.education.length !== 0 ? prevState.education[prevState.education.length - 1].key + 1 : 0,
         schoolName: "",
         major: "",
         degree: "",
@@ -133,7 +133,7 @@ class App extends React.Component {
   addExperience = () => {
     this.setState(prevState => ({
       experience: [...prevState.experience, {
-        key: prevState.experience[prevState.experience.length - 1].key + 1,
+        key: prevState.experience.length !== 0 ? prevState.experience[prevState.experience.length - 1].key + 1 : 0,
         jobTitle: "",
         companyName: "",
         companyLocation: "",
@@ -147,11 +147,17 @@ class App extends React.Component {
   addProject = () => {
     this.setState(prevState => ({
       projects: [...prevState.projects, {
-        key: prevState.projects[prevState.projects.length - 1].key + 1,
+        key: prevState.projects.length !== 0 ? prevState.projects[prevState.projects.length - 1].key + 1 : 0,
         projectName: "",
         projectLink: "",
         projectDesc: ""
       }]
+    }));
+  }
+
+  handleRemove = (id, key) => {
+    this.setState((prevState) => ({
+      [id]: [...prevState[id].slice(0, key), ...prevState[id].slice(key + 1)]
     }));
   }
 
@@ -213,6 +219,7 @@ class App extends React.Component {
                             {i.key !== 0 ? <Divider /> : null}
                             <Education handleChange={this.handleChange} 
                               handleDateChange={this.handleDateChange} eduKey={i.key} />
+                            <Button type="link" onClick={() => this.handleRemove("education", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
                         <Button type="link" onClick={this.addEducation}>Add More Education</Button>
