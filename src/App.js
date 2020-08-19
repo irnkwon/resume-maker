@@ -319,7 +319,8 @@ class App extends React.Component {
           {/* Main Content Ends */}
 
           <Footer className="footer">
-            2020 © designed and developed by Irene Kwon
+            <a href="https://github.com/irnkwon/resume-maker" target="_blank"
+              rel="noopener noreferrer">2020 © designed and developed by Irene Kwon</a>
           </Footer>
         </Layout>
       </Layout>
