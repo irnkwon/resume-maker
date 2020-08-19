@@ -8,11 +8,11 @@ export class Projects extends React.Component {
         return (
             <Space direction="vertical">
                 <Input name="projectName" placeholder="Project Name" 
-                    onChange={(e) => handleChange(e, projectKey)}></Input>
+                    onChange={(e) => handleChange(e, projectKey, "projects")}></Input>
                 <Input name="projectLink" placeholder="Project Link" 
-                    onChange={(e) => handleChange(e, projectKey)}></Input>
+                    onChange={(e) => handleChange(e, projectKey, "projects")}></Input>
                 <TextArea name="projectDesc" placeholder="Project Description" 
-                    onChange={(e) => handleChange(e, projectKey)}></TextArea>
+                    onChange={(e) => handleChange(e, projectKey, "projects")}></TextArea>
             </Space>
         );
     }

@@ -80,27 +80,25 @@ class App extends React.Component {
     }
   }
 
-  handleChange = (e, key) => {
+  handleChange = (e, key, id) => {
     const value = e.target.value;
     const name = e.target.name;
-    
-    // Basic Information
-    this.setState({ [name]: value });
 
-    // Education
-    const newEducation = this.state.education.slice();
-    newEducation[key][name] = value;
-    this.setState({ education: newEducation });
-
-    // Experience
-    const newExperience = this.state.experience.slice();
-    newExperience[key][name] = value;
-    this.setState({ experience: newExperience });
-
-    // Projects
-    const newProjects = this.state.projects.slice();
-    newProjects[key][name] = value;
-    this.setState({ projects: newProjects });
+    if (id === "edu") {
+      const newEducation = this.state.education.slice();
+      newEducation[key][name] = value;
+      this.setState({ education: newEducation });
+    } if (id === "exp") {
+      const newExperience = this.state.experience.slice();
+      newExperience[key][name] = value;
+      this.setState({ experience: newExperience });
+    } if (id === "projects") {
+      const newProjects = this.state.projects.slice();
+      newProjects[key][name] = value;
+      this.setState({ projects: newProjects });
+    } else { // Basic Information
+      this.setState({ [name]: value });
+    }
   }
 
   handleDateChange = (date, dateString, id, key) => {
