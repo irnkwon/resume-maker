@@ -233,6 +233,7 @@ class App extends React.Component {
                             {i.key !== 0 ? <Divider /> : null}
                             <Experience handleChange={this.handleChange} 
                               handleDateChange={this.handleDateChange} expKey={i.key} />
+                            <Button type="link" onClick={() => this.handleRemove("experience", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
                         <Button type="link" onClick={this.addExperience}>Add More Experience</Button>
@@ -243,6 +244,7 @@ class App extends React.Component {
                           <React.Fragment key={i.key}>
                             {i.key !== 0 ? <Divider /> : null}
                             <Projects handleChange={this.handleChange} projectKey={i.key} />
+                            <Button type="link" onClick={() => this.handleRemove("projects", i.key)} danger>Remove</Button>
                           </React.Fragment>
                         ))}
                         <Button type="link" onClick={this.addProject}>Add More Project</Button>
