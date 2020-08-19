@@ -43,7 +43,7 @@ class App extends React.Component {
       // Education
       education: [
         {
-          key: 1,
+          key: 0,
           schoolName: "Conestoga College",
           major: "Computer Programming/Analysis",
           degree: "Advanced Diploma",
@@ -70,17 +70,28 @@ class App extends React.Component {
     }
   }
 
-  handleChange = (e, dateString, id) => {
-    if (id === "schoolDate") {
-      this.setState({ schoolStartDate: dateString[0] });
-      this.setState({ schoolEndDate: dateString[1] });
-    } else if (id === "companyDate") {
+  handleChange = (e, key) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    
+    // Basic Information
+    this.setState({ [name]: value });
+
+    // Education
+    const newEducation = this.state.education.slice();
+    newEducation[key][name] = value;
+    this.setState({ education: newEducation });
+  }
+
+  handleDateChange = (date, dateString, id, key) => {
+    if (id === "schoolDate") { // Education
+      const newEducation = this.state.education.slice();
+      newEducation[key].schoolStartDate = dateString[0];
+      newEducation[key].schoolEndDate = dateString[1];
+      this.setState({ education: newEducation });
+    } if (id === "companyDate") {
       this.setState({ companyStartDate: dateString[0] });
       this.setState({ companyEndDate: dateString[1] });
-    } else {
-      const value = e.target.value;
-      const name = e.target.name;
-      this.setState({ [name]: value });
     }
   }
 
@@ -153,9 +164,10 @@ class App extends React.Component {
                     ) : i.header === "Education" ? (
                       <Space direction="vertical">
                         {this.state.education.map((i) => (
-                          <React.Fragment>
-                            {i.key !== 1 ? <Divider /> : null}
-                            <Education handleChange={this.handleChange} />
+                          <React.Fragment key={i.key}>
+                            {i.key !== 0 ? <Divider /> : null}
+                            <Education handleChange={this.handleChange} 
+                              handleDateChange={this.handleDateChange} eduKey={i.key} />
                           </React.Fragment>
                         ))}
                         <Button type="link" onClick={this.addEducation}>Add More Education</Button>
@@ -200,7 +212,7 @@ class App extends React.Component {
               <Space direction="vertical" style={{ marginTop: 30 }}>
                 <Title level={3} underline>Education</Title>
                 {this.state.education.map((i) => (
-                  <Space direction="vertical" key={i.key}>
+                  <Space direction="vertical" key={i.key} style={i.key !== 0 ? { marginTop: 15 } : null}>
                     <Title level={4}>{i.major}, {i.schoolName}</Title>
                     <Text strong>{i.degree}</Text>
                     <Text type="secondary">{i.schoolStartDate} to {i.schoolEndDate} · {i.schoolLocation}
