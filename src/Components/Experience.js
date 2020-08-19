@@ -5,15 +5,16 @@ export class Experience extends React.Component {
     render() {
         const { RangePicker } = DatePicker;
         const { TextArea } = Input;
-        const { handleChange, handleDateChange } = this.props;
-        return(
+        const { handleChange, handleDateChange, expKey } = this.props;
+        return (
             <Space direction="vertical">
-                <Input name="jobTitle" placeholder="Job Title" onChange={handleChange}></Input>
-                <Input name="companyName" placeholder="Company" onChange={handleChange}></Input>
+                <Input name="jobTitle" placeholder="Job Title" onChange={(e) => handleChange(e, expKey)}></Input>
+                <Input name="companyName" placeholder="Company" onChange={(e) => handleChange(e, expKey)}></Input>
                 <RangePicker bordered={true} onChange={(date, dateString) => 
-                    handleDateChange(date, dateString, "companyDate")} />
-                <Input name="companyLocation" placeholder="Location" onChange={handleChange}></Input>
-                <TextArea name="jobDesc" placeholder="Experience Description" onChange={handleChange}></TextArea>
+                    handleDateChange(date, dateString, "companyDate", expKey)} />
+                <Input name="companyLocation" placeholder="Location" onChange={(e) => handleChange(e, expKey)}></Input>
+                <TextArea name="jobDesc" placeholder="Experience Description" 
+                    onChange={(e) => handleChange(e, expKey)}></TextArea>
             </Space>
         );
     }

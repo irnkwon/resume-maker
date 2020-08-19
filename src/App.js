@@ -55,13 +55,18 @@ class App extends React.Component {
       ],
 
       // Experience
-      jobTitle: "Designer/Developer",
-      companyName: "WSIB Ontairo",
-      companyLocation: "Kitchener, Ontario",
-      companyStartDate: "2018-04-30",
-      companyEndDate: "2019-08-30",
-      jobDesc: "Created 5+ web and mobile applications mainly using React, React Native, CSS, " + 
-        "Node.js, Express.js, GraphQL, Firebase, Git and Sketch",
+      experience: [
+        {
+          key: 0,
+          jobTitle: "Designer/Developer",
+          companyName: "WSIB Ontairo",
+          companyLocation: "Kitchener, Ontario",
+          companyStartDate: "2018-04-30",
+          companyEndDate: "2019-08-30",
+          jobDesc: "Created 5+ web and mobile applications mainly using React, React Native, CSS, " + 
+            "Node.js, Express.js, GraphQL, Firebase, Git and Sketch"
+        }
+      ],
 
       // Projects
       projectName: "Resume Maker",
@@ -81,6 +86,11 @@ class App extends React.Component {
     const newEducation = this.state.education.slice();
     newEducation[key][name] = value;
     this.setState({ education: newEducation });
+
+    // Experience
+    const newExperience = this.state.experience.slice();
+    newExperience[key][name] = value;
+    this.setState({ experience: newExperience });
   }
 
   handleDateChange = (date, dateString, id, key) => {
@@ -89,9 +99,11 @@ class App extends React.Component {
       newEducation[key].schoolStartDate = dateString[0];
       newEducation[key].schoolEndDate = dateString[1];
       this.setState({ education: newEducation });
-    } if (id === "companyDate") {
-      this.setState({ companyStartDate: dateString[0] });
-      this.setState({ companyEndDate: dateString[1] });
+    } if (id === "companyDate") { // Experience
+      const newExperience = this.state.experience.slice();
+      newExperience[key].companyStartDate = dateString[0];
+      newExperience[key].companyEndDate = dateString[1];
+      this.setState({ experience: newExperience });
     }
   }
 
@@ -106,6 +118,20 @@ class App extends React.Component {
         schoolStartDate: "",
         schoolEndDate: "",
         eduDesc: ""
+      }]
+    }));
+  }
+
+  addExperience = () => {
+    this.setState(prevState => ({
+      experience: [...prevState.experience, {
+        key: prevState.experience[prevState.experience.length - 1].key + 1,
+        jobTitle: "",
+        companyName: "",
+        companyLocation: "",
+        companyStartDate: "",
+        companyEndDate: "",
+        jobDesc: ""
       }]
     }));
   }
@@ -174,8 +200,14 @@ class App extends React.Component {
                       </Space>
                     ) : i.header === "Experience" ? (
                       <Space direction="vertical">
-                        <Experience />
-                        <Button type="link">Add More Experience</Button>
+                        {this.state.experience.map((i) => (
+                          <React.Fragment key={i.key}>
+                            {i.key !== 0 ? <Divider /> : null}
+                            <Experience handleChange={this.handleChange} 
+                              handleDateChange={this.handleDateChange} expKey={i.key} />
+                          </React.Fragment>
+                        ))}
+                        <Button type="link" onClick={this.addExperience}>Add More Experience</Button>
                       </Space>
                     ) : i.header === "Projects" ? (
                         <Space direction="vertical">
@@ -224,10 +256,14 @@ class App extends React.Component {
 
               <Space direction="vertical" style={{ marginTop: 30 }}>
                 <Title level={3} underline>Experience</Title>
-                <Title level={4}>{this.state.jobTitle}, {this.state.companyName}</Title>
-                <Text type="secondary">{this.state.companyStartDate} to {this.state.companyEndDate} · {this.state.companyLocation}
-                </Text>
-                <Text>{this.state.jobDesc}</Text>
+                {this.state.experience.map((i) => (
+                  <Space direction="vertical" key={i.key} style={i.key !== 0 ? { marginTop: 15 } : null}>
+                    <Title level={4}>{i.jobTitle}, {i.companyName}</Title>
+                    <Text type="secondary">{i.companyStartDate} to {i.companyEndDate} · {i.companyLocation}
+                    </Text>
+                    <Text>{i.jobDesc}</Text>
+                  </Space>
+                ))}
               </Space>
 
               <Space direction="vertical" style={{ marginTop: 30 }}>

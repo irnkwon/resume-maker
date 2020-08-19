@@ -12,7 +12,7 @@ export class Education extends React.Component {
                 <Input name="major" placeholder="Major" onChange={(e) => handleChange(e, eduKey)}></Input>
                 <Input name="degree" placeholder="Degree" onChange={(e) => handleChange(e, eduKey)}></Input>
                 <RangePicker bordered={true} onChange={(date, dateString) => 
-                handleDateChange(date, dateString, "schoolDate", eduKey)} />
+                    handleDateChange(date, dateString, "schoolDate", eduKey)} />
                 <Input name="schoolLocation" placeholder="Location" onChange={(e) => handleChange(e, eduKey)}></Input>
                 <TextArea name="eduDesc" placeholder="Education Description" 
                     onChange={(e) => handleChange(e, eduKey)}></TextArea>
