@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/resume-maker/static/css/main.c2742612.chunk.css",
-    "main.js": "/resume-maker/static/js/main.cbaca2f2.chunk.js",
-    "main.js.map": "/resume-maker/static/js/main.cbaca2f2.chunk.js.map",
+    "main.js": "/resume-maker/static/js/main.b25924c1.chunk.js",
+    "main.js.map": "/resume-maker/static/js/main.b25924c1.chunk.js.map",
     "runtime-main.js": "/resume-maker/static/js/runtime-main.1d49e761.js",
     "runtime-main.js.map": "/resume-maker/static/js/runtime-main.1d49e761.js.map",
     "static/css/2.04ff9426.chunk.css": "/resume-maker/static/css/2.04ff9426.chunk.css",
-    "static/js/2.4f619783.chunk.js": "/resume-maker/static/js/2.4f619783.chunk.js",
-    "static/js/2.4f619783.chunk.js.map": "/resume-maker/static/js/2.4f619783.chunk.js.map",
+    "static/js/2.41dcccea.chunk.js": "/resume-maker/static/js/2.41dcccea.chunk.js",
+    "static/js/2.41dcccea.chunk.js.map": "/resume-maker/static/js/2.41dcccea.chunk.js.map",
     "index.html": "/resume-maker/index.html",
-    "precache-manifest.72daca95af1c9f398a15b34d2f54bac8.js": "/resume-maker/precache-manifest.72daca95af1c9f398a15b34d2f54bac8.js",
+    "precache-manifest.f5b5acc742e913b012c9491a085164d0.js": "/resume-maker/precache-manifest.f5b5acc742e913b012c9491a085164d0.js",
     "service-worker.js": "/resume-maker/service-worker.js",
     "static/css/2.04ff9426.chunk.css.map": "/resume-maker/static/css/2.04ff9426.chunk.css.map",
     "static/css/main.c2742612.chunk.css.map": "/resume-maker/static/css/main.c2742612.chunk.css.map",
-    "static/js/2.4f619783.chunk.js.LICENSE.txt": "/resume-maker/static/js/2.4f619783.chunk.js.LICENSE.txt"
+    "static/js/2.41dcccea.chunk.js.LICENSE.txt": "/resume-maker/static/js/2.41dcccea.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1d49e761.js",
     "static/css/2.04ff9426.chunk.css",
-    "static/js/2.4f619783.chunk.js",
+    "static/js/2.41dcccea.chunk.js",
     "static/css/main.c2742612.chunk.css",
-    "static/js/main.cbaca2f2.chunk.js"
+    "static/js/main.b25924c1.chunk.js"
   ]
 }
